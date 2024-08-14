@@ -84,10 +84,10 @@ function MapInner() {
   }, [user]);
 
   useEffect(() => {
-    if (importantPinContext?.trackingPin){
+    if (importantPinContext?.trackingPin) {
       const trackingPoiId: trackingPinID = {
         poi_id: importantPinContext.trackingPin.poi_id,
-      }
+      };
       localStorage.setItem("trackingPinID", JSON.stringify(trackingPoiId));
     }
   }, [importantPinContext?.trackingPin]);
@@ -97,7 +97,7 @@ function MapInner() {
     if (poiData.length === 0) return;
 
     getTrackingPinFromLocalStorage();
-  }, [poiData])
+  }, [poiData]);
 
   useEffect(() => {
     if (!closestNotCompletedPin || !userCoordinates) return;
@@ -114,12 +114,19 @@ function MapInner() {
   }, [importantPinContext?.guessedPin]);
 
   useEffect(() => {
-    if(!importantPinContext?.trackingPin) return;
-    if (!selectedFilters.every((tag) => importantPinContext.trackingPin?.tags.includes(tag))) {
+    if (!importantPinContext?.trackingPin) return;
+    if (
+      !selectedFilters.every((tag) =>
+        importantPinContext.trackingPin?.tags.includes(tag)
+      )
+    ) {
       importantPinContext.setTrackingPin(null);
-      localStorage.setItem("trackingPinID", JSON.stringify({poi_id: -1} as trackingPinID))
+      localStorage.setItem(
+        "trackingPinID",
+        JSON.stringify({ poi_id: -1 } as trackingPinID)
+      );
     }
-  },[selectedFilters])
+  }, [selectedFilters]);
 
   //on load, or refresh
   useEffect(() => {
@@ -144,9 +151,10 @@ function MapInner() {
     if (!savedPoiId) return;
 
     const { poi_id } = JSON.parse(savedPoiId) as trackingPinID;
-    const savedTrackingPoi = poiData.find((pin) => pin.poi_id === poi_id) || null;
+    const savedTrackingPoi =
+      poiData.find((pin) => pin.poi_id === poi_id) || null;
     importantPinContext.setTrackingPin(savedTrackingPoi);
-  }
+  };
 
   // HANDLER FUNCTION
   const handleFetchPoiByUid = async () => {
@@ -220,7 +228,7 @@ function MapInner() {
     const userCoord: Coordinates = {
       longitude: position.longitude,
       latitude: position.latitude,
-    }
+    };
     setUserCoordinates(userCoord);
   };
 
@@ -229,7 +237,9 @@ function MapInner() {
    * Accounts for the toggled filters
    * @param position
    */
-  const handleSetClosestNotCompletedPin = (position: GeolocationCoordinates) => {
+  const handleSetClosestNotCompletedPin = (
+    position: GeolocationCoordinates
+  ) => {
     const userCoordinates: Coordinates = {
       longitude: position.longitude,
       latitude: position.latitude,
@@ -295,7 +305,7 @@ function MapInner() {
       {/* GAME UI */}
       <div className="absolute top-0 left-0 z-50 w-screen pt-4 gap-4 flex flex-col">
         {/* HEADER CONTROLLER */}
-        <div className="fixed top-20 flex flex-col gap-4 w-full">
+        <div id="headerMenu" className="fixed top-20 flex flex-col gap-4 w-full">
           <FilterButton
             filters={filters}
             selectedFilters={selectedFilters}
@@ -314,7 +324,10 @@ function MapInner() {
         />
 
         {/* FOOTER CONTROLLER */}
-        <div className="fixed bottom-0 left-0 w-full flex gap-2 h-16 bg-white rounded-t-3xl justify-center items-end">
+        <div
+          id="footerMenu"
+          className="fixed bottom-0 left-0 w-full flex gap-2 h-16 bg-white rounded-t-3xl justify-center items-end"
+        >
           <GameControls
             pins={poiData}
             trackingPin={closestNotCompletedPin}
@@ -391,9 +404,9 @@ function MapInner() {
             </>
           )}
         <MainQuest closestNotCompletedPin={closestNotCompletedPin} />
-        <MapControls 
-        handleUserCoordinates={handleSetUserCoordinates}
-        handleSetClosestNotCompletedPin={handleSetClosestNotCompletedPin}
+        <MapControls
+          handleUserCoordinates={handleSetUserCoordinates}
+          handleSetClosestNotCompletedPin={handleSetClosestNotCompletedPin}
         />
       </Map>
 

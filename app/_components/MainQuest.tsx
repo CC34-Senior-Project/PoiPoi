@@ -25,7 +25,6 @@ const MainQuest = ({ closestNotCompletedPin: closestPin }: MainQuestProps) => {
   const { gameMap } = useMap();
 
   useEffect(() => {
-    
     if (!trackingPinContext || !trackingPinContext?.trackingPin) {
       setIsTracking(false);
       setPinToPanTo(closestPin);
@@ -55,6 +54,7 @@ const MainQuest = ({ closestNotCompletedPin: closestPin }: MainQuestProps) => {
 
   return (
     <div
+      id="mainQuest"
       className="fixed w-screen h-16 top-0 left-0 z-50 p-0 m-0 flex justify-between"
       onClick={() => {
         if (pinToPanTo) handlePanMapToTrackingPin(pinToPanTo);

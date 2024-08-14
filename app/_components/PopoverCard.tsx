@@ -14,7 +14,7 @@ const PopoverCard = ({
   poiData: Pin[];
   selectedPoiId: number;
   setShowPopup: (arg0: boolean) => void;
-  userCoordinates?: Coordinates | null;
+  userCoordinates: Coordinates | null;
   setScore: (arg0: number | null) => void;
   setCheckLevel: (arg: boolean) => void;
 }) => {
@@ -22,7 +22,8 @@ const PopoverCard = ({
     <div className="fixed top-0 left-0 w-screen h-svh">
       <Popover defaultOpen>
         <PopoverContent>
-          {setShowPopup && userCoordinates && (
+          {/* userCoordinate can pass deep down even if it is still set to null (default state, geolocate not working for users outside mapbox so it'll still set to null) */}
+          {setShowPopup && (
             <PoiPopup
               setCheckLevel={setCheckLevel}
               id={selectedPoiId}

@@ -28,21 +28,28 @@ GameControlsProps): React.JSX.Element => {
   return (
     <div className="flex justify-between min-w-[360px] max-w-full">
       <Link href={"/map"}>
-        <ButtonIconCircle text="Map" variant={!showPoidex ? "active" : "default"}>
+        <ButtonIconCircle
+          text="Map"
+          variant={!showPoidex ? "active" : "default"}
+        >
           <FaMapLocationDot size={24} />
         </ButtonIconCircle>
       </Link>
 
-      <Poidex pins={pins} setShowPoidex={setShowPoidex} showPoidex={showPoidex} />
+      <Poidex
+        pins={pins}
+        setShowPoidex={setShowPoidex}
+        showPoidex={showPoidex}
+      />
 
       <Link href="/leaderboard">
-        <ButtonIconCircle text="leaderboard">
+        <ButtonIconCircle text="Leaderboard">
           <MdLeaderboard size={24} />
         </ButtonIconCircle>
       </Link>
 
       <Link href={"/login"}>
-        <ButtonIconCircle text="account">
+        <ButtonIconCircle text="Account">
           <MdAccountCircle size={24} />
         </ButtonIconCircle>
       </Link>

@@ -28,7 +28,7 @@ const Poidex = ({
   return (
     <>
       <ButtonIconCircle
-        text="collection"
+        text="Collection"
         variant={showPoidex ? "secondary" : "default"}
         onClick={(): void => void setShowPoidex(true)}
       >
