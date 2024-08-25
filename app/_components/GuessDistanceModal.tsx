@@ -48,7 +48,7 @@ const GuessDistanceModal = ({
     };
     try {
       const response = await fetch(
-        `${process.env.NEXT_PUBLIC_BASE_URL}/api/hints/post`,
+        `${process.env.NEXT_PUBLIC_BASE_URL}/api/hints`,
         {
           method: "POST",
           headers: {
